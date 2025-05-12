@@ -4,8 +4,8 @@ services:
     container_name: jellyfin
     network_mode: 'host' # TODO Rhydian should probably not use host network mode...
     volumes:
-      - /home/rhydian/jellyfin/config:/config
-      - /home/rhydian/jellyfin/cache:/cache
+      - ./jellyfin/config:/config
+      - ./jellyfin/cache:/cache
       - /mnt/media/Movies:/movies
       - /mnt/media/Shows:/shows
     restart: 'unless-stopped'
