@@ -80,9 +80,9 @@ services:
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=debug
-      - TZ=Asia/Tashkent
+      - TZ=Etc/UTC
     ports:
       - 5055:5055
     volumes:
-      - ./jellyseer/config:/app/config
+      - ./jellyseerr/config:/app/config
     restart: unless-stopped
