@@ -9,13 +9,20 @@ password=password # replace me with home/DiskStation creds!
 //192.168.4.54/media /mnt/media cifs credentials=/home/rhydian/.mnt-credentials,uid=1000,gid=1000,iocharset=utf8,file_mode=0664,dir_mode=0775 0 0
 ```
 
-Then be sure to have docker service wait for that mount before starting...
+# Tell docker to wait for media mount
 
 ```
 $ cat /etc/systemd/system/docker.service.d/wait-for-mounts.conf
 
 [Unit]
 RequiredMountsFor=/mnt/media
+```
+
+# Populate .env
+
+```sh
+cp .env.example .env
+# Then populate the .env vars
 ```
 
 # Start containers

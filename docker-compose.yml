@@ -86,3 +86,12 @@ services:
     volumes:
       - ./jellyseerr/config:/app/config
     restart: unless-stopped
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+    ports:
+      - 80:80
+    env_file: .env
