@@ -2,18 +2,21 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    network_mode: 'host' # TODO Rhydian should probably not use host network mode...
     volumes:
       - ./jellyfin/config:/config
       - ./jellyfin/cache:/cache
       - /mnt/media/Movies:/movies
       - /mnt/media/Shows:/shows
-    restart: 'unless-stopped'
+    ports:
+      - 8096:8096
+      - 8920:8920
+      - 7359:7359/udp
+      - 1900:1900/udp
+    restart: unless-stopped
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    network_mode: 'host' # TODO Rhydian should probably not use host network mode...
     environment:
       - PUID=1000
       - PGID=1000
@@ -22,18 +25,21 @@ services:
       - ./radarr/data:/config
       - /mnt/media/Movies:/movies
       - ./qbittorrent/downloads:/downloads
+    ports:
+      - 7878:7878
     restart: unless-stopped
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
-    network_mode: 'host' # TODO Rhydian should probably not use host network mode...
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - ./prowlarr/data:/config
+    ports:
+      - 9696:9696
     restart: unless-stopped
 
   qbittorrent:
