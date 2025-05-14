@@ -69,8 +69,20 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./sonarr/data:/config
-      - ./sonarr/downloads:/downloads
+      - ./qbittorrent/downloads:/downloads
       - /mnt/media/Shows:/tv
     ports:
       - 8989:8989
+    restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Asia/Tashkent
+    ports:
+      - 5055:5055
+    volumes:
+      - ./jellyseer/config:/app/config
     restart: unless-stopped
