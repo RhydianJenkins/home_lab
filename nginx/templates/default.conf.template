@@ -1,0 +1,22 @@
+server {
+	listen 80;
+	server_name ${NGINX_HOST} www.${NGINX_HOST};
+	return 301 https://$host$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	server_name ${NGINX_HOST} www.${NGINX_HOST};
+
+	error_log /var/log/nginx/error.log debug;
+
+	ssl_certificate /etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem;
+    	ssl_certificate_key /etc/letsencrypt/live/${NGINX_HOST}/privkey.pem;
+
+	index index.html;
+	root /var/www/simple_website;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}

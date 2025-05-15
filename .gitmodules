@@ -1,0 +1,3 @@
+[submodule "simple_website"]
+	path = simple_website
+	url = git@github.com:rhydianjenkins/simple_website

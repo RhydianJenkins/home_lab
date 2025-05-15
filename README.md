@@ -21,8 +21,15 @@ RequiredMountsFor=/mnt/media
 # Populate .env
 
 ```sh
-cp .env.example .env
-# Then populate the .env vars
+cp .env.example .env # don't forget to populate these!
+```
+
+# Generate SSL certificates
+
+Generates certificates in `/etc/letsencrypt` to be mounted into the nginx container.
+
+```sh
+sudo certbot certonly --standalone -d example.com -d jellyfin.example.com
 ```
 
 # Start containers

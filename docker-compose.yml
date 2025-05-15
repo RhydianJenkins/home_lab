@@ -92,6 +92,9 @@ services:
     container_name: nginx
     volumes:
       - ./nginx/templates:/etc/nginx/templates
+      - ./simple_website:/var/www/simple_website
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - 80:80
+      - 443:443
     env_file: .env
