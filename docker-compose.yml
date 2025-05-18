@@ -24,7 +24,7 @@ services:
     volumes:
       - ./radarr/data:/config
       - /mnt/media/Movies:/movies
-      - ./qbittorrent/downloads:/downloads
+      - /mnt/media/Downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -53,7 +53,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - ./qbittorrent/appdata:/config
-      - ./qbittorrent/downloads:/downloads
+      - /mnt/media/Downloads:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -69,7 +69,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ./sonarr/data:/config
-      - ./qbittorrent/downloads:/downloads
+      - /mnt/media/Downloads:/downloads
       - /mnt/media/Shows:/tv
     ports:
       - 8989:8989
@@ -90,6 +90,9 @@ services:
   nginx:
     image: nginx
     container_name: nginx
+    depends_on:
+      - jellyfin
+      - jellyseerr
     volumes:
       - ./nginx/templates:/etc/nginx/templates
       - ./simple_website:/var/www/simple_website
