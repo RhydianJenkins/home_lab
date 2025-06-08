@@ -1,0 +1,17 @@
+server {
+	listen 80;
+	server_name cctv.${NGINX_HOST};
+	return 301 https://cctv.${NGINX_HOST};
+}
+
+server {
+	listen 443 ssl;
+	server_name cctv.${NGINX_HOST};
+
+	ssl_certificate /etc/letsencrypt/live/cctv.${NGINX_HOST}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/cctv.${NGINX_HOST}/privkey.pem;
+
+	location / {
+		proxy_pass http://frigate:8971;
+	}
+}

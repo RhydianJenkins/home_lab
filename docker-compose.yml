@@ -101,3 +101,24 @@ services:
       - 80:80
       - 443:443
     env_file: .env
+
+  frigate:
+    image: ghcr.io/blakeblackshear/frigate:stable
+    container_name: frigate
+    restart: unless-stopped
+    stop_grace_period: 5s
+    shm_size: "512mb"
+    env_file: .env
+    volumes:
+      - ./frigate/config.yaml:/config/config.yaml
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/media/CCTV:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "8971:8971"
+      - "8554:8554" # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
