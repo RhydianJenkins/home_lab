@@ -1,0 +1,55 @@
+version: 0.15-1
+
+tls:
+  enabled: false
+
+mqtt:
+  enabled: false
+
+ffmpeg:
+  hwaccel_args: preset-rpi-64-h264
+
+detectors:
+  cpu1:
+    type: cpu
+    num_threads: 4
+
+cameras:
+  side:
+    ffmpeg:
+      inputs:
+        - path: '{FRIGATE_CAM_1_PATH}'
+          roles:
+            - detect
+    motion:
+      mask:
+        - 0.521,0.207,0.947,0.157,0.949,0,0.479,0
+        - 0.081,0.802,0,0.942,0,0.56
+        - 0,0.092,0.288,0.094,0.287,0.059,0,0.054
+  front:
+    ffmpeg:
+      inputs:
+        - path: '{FRIGATE_CAM_2_PATH}'
+          roles:
+            - detect
+    motion:
+      mask:
+
+        - 1,0.525,0.961,0.536,0.909,1,1,1
+        - 0,0.091,0.288,0.092,0.287,0.057,0.001,0.059
+record:
+  enabled: true
+  retain:
+    days: 7
+    mode: motion
+  alerts:
+    retain:
+      days: 30
+  detections:
+    retain:
+      days: 30
+
+detect:
+  fps: 5
+  width: 640
+  height: 360
