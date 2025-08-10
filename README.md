@@ -64,7 +64,15 @@ cp .env.example .env # don't forget to populate these!
 Generates certificates in `/etc/letsencrypt` to be mounted into the nginx container.
 
 ```sh
-sudo certbot certonly --standalone -d example.com -d jellyfin.example.com
+sudo certbot certonly --standalone -d example.com
+sudo certbot certonly --standalone -d jellyfin.example.com
+...
+```
+
+... Then you'll need to periodically renew the certificates
+
+```sh
+sudo certbot renew
 ```
 
 # Start containers

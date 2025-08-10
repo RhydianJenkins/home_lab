@@ -122,3 +122,17 @@ services:
       - "8554:8554" # RTSP feeds
       - "8555:8555/tcp" # WebRTC over tcp
       - "8555:8555/udp" # WebRTC over udp
+
+  babybuddy:
+    image: lscr.io/linuxserver/babybuddy:latest
+    container_name: babybuddy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - CSRF_TRUSTED_ORIGINS=http://babybuddy:8000,https://baby.rhydianjenkins.dev
+    volumes:
+      - ./babybuddy/config:/config
+    ports:
+      - 8000:8000
+    restart: unless-stopped

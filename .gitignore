@@ -4,5 +4,6 @@ prowlarr/
 radarr/
 sonarr/
 qbittorrent/
+babybuddy/
 
 .env

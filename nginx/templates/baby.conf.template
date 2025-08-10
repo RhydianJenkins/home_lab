@@ -1,0 +1,17 @@
+server {
+	listen 80;
+	server_name baby.${NGINX_HOST};
+	return 301 https://baby.${NGINX_HOST};
+}
+
+server {
+	listen 443 ssl;
+	server_name baby.${NGINX_HOST};
+
+	ssl_certificate /etc/letsencrypt/live/baby.${NGINX_HOST}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/baby.${NGINX_HOST}/privkey.pem;
+
+	location / {
+		proxy_pass http://babybuddy:8000;
+	}
+}
