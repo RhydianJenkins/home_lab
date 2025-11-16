@@ -5,5 +5,6 @@ radarr/
 sonarr/
 qbittorrent/
 babybuddy/
+bazarr/
 
 .env
