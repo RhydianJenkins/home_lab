@@ -1,10 +1,15 @@
+.env
+babybuddy/
+bazarr/
 jellyfin/
 jellyseerr/
 prowlarr/
+qbittorrent/
 radarr/
 sonarr/
-qbittorrent/
-babybuddy/
-bazarr/
 
-.env
+frigate/**
+!frigate/config/
+!frigate/config/config.yaml
+
+
