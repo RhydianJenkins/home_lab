@@ -7,12 +7,10 @@ services:
       - ./jellyfin/cache:/cache
       - /mnt/media/Movies:/movies
       - /mnt/media/Shows:/shows
-    ports:
-      - 8096:8096
-      - 8920:8920
-      - 7359:7359/udp
-      - 1900:1900/udp
     restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -152,3 +150,21 @@ services:
       - 6767:6767
     restart: unless-stopped
 
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+      # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8096:8096     # Jellyfin web ui
+      - 7359:7359/udp # Jellyfin client discovery
+      - 1900:1900/udp # Jellyfin DLNA discovery
+      - 8888:8888/tcp # HTTP proxy
+      - 8388:8388/tcp # Shadowsocks
+      - 8388:8388/udp # Shadowsocks
+    volumes:
+      - ./gluetun:/gluetun
+    env_file: .env

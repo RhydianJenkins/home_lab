@@ -1,6 +1,7 @@
 .env
 babybuddy/
 bazarr/
+gluetun/
 jellyfin/
 jellyseerr/
 prowlarr/
@@ -11,5 +12,3 @@ sonarr/
 frigate/**
 !frigate/config/
 !frigate/config/config.yaml
-
-
