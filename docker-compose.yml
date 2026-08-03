@@ -30,14 +30,13 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    network_mode: "service:gluetun"
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
       - ./prowlarr/data:/config
-    ports:
-      - 9696:9696
     restart: unless-stopped
 
   qbittorrent:
@@ -119,7 +118,7 @@ services:
       - "8555:8555/udp" # WebRTC over udp
 
   babybuddy:
-    image: lscr.io/linuxserver/babybuddy:latest
+    image: lscr.io/linuxserver/babybuddy:v2.9.2-ls242
     container_name: babybuddy
     environment:
       - PUID=1000
@@ -165,6 +164,7 @@ services:
       - 8080:8080     # QBitTorrent web ui
       - 6881:6881     # QBitTorrent
       - 6881:6881/udp # QBitTorrent
+      - 9696:9696     # Prowlarr
     volumes:
       - ./gluetun:/gluetun
     env_file: .env
