@@ -1,4 +1,4 @@
-version: 0.16-0
+version: 0.17-0
 
 tls:
   enabled: false
@@ -39,9 +39,6 @@ cameras:
         - 0,0.091,0.288,0.092,0.287,0.057,0.001,0.059
 record:
   enabled: true
-  retain:
-    days: 7
-    mode: motion
   alerts:
     retain:
       days: 30
@@ -49,6 +46,10 @@ record:
     retain:
       days: 30
 
+  continuous:
+    days: 0
+  motion:
+    days: 7
 detect:
   fps: 5
   width: 640
