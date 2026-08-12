@@ -12,3 +12,13 @@ sonarr/
 frigate/**
 !frigate/config/
 !frigate/config/config.yaml
+
+prometheus/**
+!prometheus/config/
+!prometheus/config/prometheus.yml
+
+grafana/**
+!grafana/provisioning/
+!grafana/provisioning/**
+!grafana/dashboards/
+!grafana/dashboards/**
